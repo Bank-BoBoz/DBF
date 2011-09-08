@@ -1,0 +1,41 @@
+
+<h1>Users List</h1>
+<table>
+
+
+<% if User.find_by_id(session[:user_id]).role == "doctor" %>
+<h1>Listing logs</h1>
+
+  <tr>
+    <th>Value</th>
+    <th>Time</th>
+    <th>Category</th>
+    <th>Note</th>
+    <th>Owner</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @log.each do |log| %>
+          <% if log.own == @user_name %>
+          <tr>
+            <td><%= log.value %></td>
+            <td><%= log.time %></td>
+            <td><%= log.category %></td>
+            <td><%= log.note %></td>
+            <td><%= log.own %></td>
+            <td><%= link_to 'Show', log %></td>
+            <td><%= link_to 'Edit', edit_log_path(log) %></td>
+            <td><%= link_to 'Destroy', log, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+      <% end %>
+      <% end %>
+
+
+<br/>
+
+<%= link_to 'Back', :action => :index, :controller => :users   %>
+<% end %>
+<!-- endDoctor -->
+
+</table>

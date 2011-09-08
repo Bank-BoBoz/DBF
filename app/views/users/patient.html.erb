@@ -1,0 +1,29 @@
+
+<h1>Listing users</h1>
+<table>
+<tr>
+<th>Name</th>
+</tr>
+<% @users.each do |user| %>
+      <% if user.pair == User.find_by_id(session[:user_id]).name %>
+
+<tr>
+<td><%=h user.name %></td>
+<td><%= link_to 'Show', user %></td>
+<td><%= link_to 'Edit', edit_user_path(user) %></td>
+<td><%= link_to 'Destroy', user, :confirm => 'Are you sure?',
+:method => :delete %></td>
+</tr>
+<% end %>
+      <% end %>
+</table>
+
+                    <br/>
+<% if User.find_by_id(session[:user_id] != nil) %>
+           <%= User.find_by_id(session[:user_id]).name   %>
+           <% end %>
+<br />
+<%= link_to 'New user', new_user_path %>
+      <br />
+<%= link_to "Back", :action => :index, :controller => :admin %>
+

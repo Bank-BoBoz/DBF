@@ -1,0 +1,56 @@
+<div class="depot-form">
+<% form_for(@user) do |f| %>
+<fieldset>
+<legend>Enter User Details</legend>
+
+
+
+<div>
+<%= f.label :name %>:<br/>
+<%= f.text_field :name %>
+</div>
+     <br/>
+       <div class="field">
+    <div>
+ <%= f.label :user_password, 'Password' %>:<br/>
+<%= f.password_field :password%>
+</div>   </div>
+
+
+<div>    <div class="field">
+<%= f.label :user_password_confirmation, 'Confirm the password' %>:     <br/>
+<%= f.password_field :password_confirmation%>
+</div>   </div>
+
+
+  <div>
+<%= f.label :FirstName %>:<br/>
+<%= f.text_field :firstName %>
+</div>
+
+  <div>
+<%= f.label :LastName %>:<br/>
+<%= f.text_field :lastName %>
+</div>
+
+  <div>
+<%= f.label :PhoneNumber %>:<br/>
+<%= f.text_field :phoneNumber %>
+</div>
+
+
+   <div class="field">
+    <%= f.label :role %><br />
+    <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+  </div>
+
+
+<div>
+<%= f.submit "Add User",:class=> "submit" %>
+</div>
+<div>
+  <%= link_to 'Back', users_path %>
+</div>
+</fieldset>
+<% end %>
+</div>

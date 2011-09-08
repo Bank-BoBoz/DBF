@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Value:</b>
+  <%= @log.value %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @log.time %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @log.category %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @log.note %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @log.own %>
+</p>
+
+<%= link_to 'Edit', edit_log_path(@log) %> |
+<%= link_to 'Back', logs_path %>
+
+

@@ -1,0 +1,66 @@
+
+<p id="notice"><%= notice %></p>
+
+<h1>User Information</h1>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>First Name:</b>
+  <%= @user.firstName %>
+</p>
+
+<p>
+  <b>Last Name:</b>
+  <%= @user.lastName %>
+</p>
+
+<p>
+  <b>Phone Number:</b>
+  <%= @user.phoneNumber %>
+</p>
+
+
+<p>
+  <b>Role:</b>
+  <%= @user.role %>
+</p>
+
+<% if @user.role == "patient" %>
+<p>
+  <b>Pair:</b>
+  <%= @user.pair %>
+</p>
+<% end %>
+
+<% if User.find_by_id(session[:user_id]).role == "admin" %>
+<%= link_to 'Edit', edit_user_path(@user) %> | <%end%>
+<%= link_to 'Back', users_path %> <br/>
+
+
+
+<% if User.find_by_id(session[:user_id]).role == "doctor" %>
+_______________________________________________
+<table>
+<h1>Listing logs</h1>
+  <tr>
+    <th>Value</th>
+    <th>Time</th>
+    <th>Category</th>
+    <th>Note</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @user.logs.each do |log| %>
+          <tr>
+            <td><%= log.value %></td>
+            <td><%= log.time %></td>
+            <td><%= log.category %></td>
+            <td><%= log.note %></td>
+          </tr>
+      <% end %>
+<br/>
+</table>  <%end%>
