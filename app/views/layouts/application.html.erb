@@ -12,14 +12,7 @@
 <body>
 
            <div class="fb1">
-             <% if User.find_by_id(session[:user_id]).name != nil %>
-                 <%= User.find_by_id(session[:user_id]).name %>
 
-
-            <%= link_to "logout", :action => 'logout', :controller => 'admin' %>
-                 <% else %>
-             <%= link_to "login", :action => 'login', :controller => 'admin' %>
-              <% end%>
 
            </div>
 
