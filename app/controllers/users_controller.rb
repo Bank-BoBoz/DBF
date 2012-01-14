@@ -11,11 +11,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def link_log
-    @link = User.pair
-    redirect_to :controller => :logs, :action => :index
-  end
-
   # GET /users/1
   # GET /users/1.xml
   def show
@@ -31,6 +26,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
+    @log = Log.new
 
     respond_to do |format|
       format.html # new.html.erb

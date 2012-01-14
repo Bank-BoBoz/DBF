@@ -1,52 +1,46 @@
 
-
-
-
   <h1>Users List</h1>
   <table>
 
   <!-- admin -->
+  <% if User.find_by_id(session[:user_id]).role == "admin" %>
+        <tr>
+            <td><b>UserID</b></td>
+        </tr>
 
+    <% for user in @users %>
+         <tr>
+            <td><%= link_to user.name, user %></td>
+          </tr>
+    <% end %>
+
+    </table>
+  <%= link_to 'New user', new_user_path %>
 
   <% if User.find_by_id(session[:user_id]).role == "admin" %>
-
-<% for user in @users %>
-
-<tr>
-<td><%=h user.name %></td>
-<td><%= link_to 'Show', user %></td>
-<td><%= link_to 'Edit', edit_user_path(user) %></td>
-<td><%= link_to 'Destroy', user, :confirm => 'Are you sure?',:method => :delete %></td>
-</tr>
-<% end %>
-
-</table>
-<%= link_to 'New user', new_user_path %>
-<% if User.find_by_id(session[:user_id]).role == "admin" %>
-<%= link_to 'Back', :action => 'index', :controller => :admin %> <%end%>
-      <br />
+    <%= link_to 'Back', :action => 'index', :controller => :admin %> <%end%>
+    <br />
   <% end %>
   <!-- end admin -->
 
 
+
+
+
     <!-- doctor -->
-
-
-
 
   <% if User.find_by_id(session[:user_id]).role == "doctor" %>
     <% @users.each do |user| %>
       <% if user.pair == User.find_by_id(session[:user_id]).name %>
-     <table>
-<tr>
-<td><%=h user.name %></td>
-<td><%= link_to 'Show', user %></td>
+        <table>
+            <tr>
+                <td><%= link_to user.name, user %></td>
+            </tr>
+            <% end %>
+        </table>
+      <% end%>
 
-</tr>
-<% end %>
-</table>
-<% end%>
-         <%= link_to "Back", :action => :indexDoctor, :controller => :admin %>
+  <%= link_to "Back", :action => :indexDoctor, :controller => :admin %>
 <!-- end doctor -->
 
 

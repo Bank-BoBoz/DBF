@@ -1,0 +1,2 @@
+module IphoneLogHelper
+end

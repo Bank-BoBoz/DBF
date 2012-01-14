@@ -1,3 +1,5 @@
+require 'json'
+
 class AdminController < ApplicationController
 
   layout 'application', :except => :login
@@ -6,25 +8,25 @@ class AdminController < ApplicationController
   def login
     if request.post?
       user = User.authenticate(params[:name], params[:password])
-        if user
-          flash[:notice] = "#{user.name}."
-          session[:user_id] = user.id
+      if user
+        flash[:notice] = "#{user.name}."
+        session[:user_id] = user.id
 
 
-          if user.role == "admin"
-            redirect_to(:action => "index")
+        if user.role == "admin"
+          redirect_to(:action => "index")
 
-          elsif user.role == "doctor"
+        elsif user.role == "doctor"
           redirect_to(:action => "indexDoctor")
 
-          elsif user.role == "patient"
+        elsif user.role == "patient"
           redirect_to(:action => "indexPatient")
 
-          end
-
-        else
-          flash.now[:notice] = "Invalid username or password, please try again"
         end
+
+      else
+        flash.now[:notice] = "Invalid username or password, please try again"
+      end
     end
   end
 
@@ -32,6 +34,17 @@ class AdminController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = "Logged Out"
     redirect_to(:action => "login")
+  end
+
+  def iLogin
+    @result
+    user = User.authenticate(params[:name], params[:password])
+    if user
+      result = "success"
+    else
+      result = "fail"
+    end
+    render :json => result
   end
 
   def index
@@ -45,7 +58,6 @@ class AdminController < ApplicationController
   def indexPatient
 
   end
-
 
 
 end

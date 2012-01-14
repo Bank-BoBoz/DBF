@@ -1,0 +1,8 @@
+Description:
+    Explain the generator
+
+Example:
+    rails generate jsontest Thing
+
+    This will create:
+        what/will/it/create

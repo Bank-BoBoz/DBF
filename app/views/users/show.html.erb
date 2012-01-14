@@ -1,12 +1,8 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1>User Information</h1>
+<h1 style="text-transform: uppercase;"> <%= @user.name %> </h1>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
 
 <p>
   <b>First Name:</b>
@@ -31,7 +27,7 @@
 
 <% if @user.role == "patient" %>
 <p>
-  <b>Pair:</b>
+  <b>Belong to:</b>
   <%= @user.pair %>
 </p>
 <% end %>
@@ -39,6 +35,12 @@
 <% if User.find_by_id(session[:user_id]).role == "admin" %>
 <%= link_to 'Edit', edit_user_path(@user) %> | <%end%>
 <%= link_to 'Back', users_path %> <br/>
+
+
+<!--
+<button type="button" onclick= "edit_user_path(@user)" value="link_to"> Edit</button>
+<button type="button" onclick= "history.go(-1);" value="link_to"> Back</button>
+-->
 
 
 

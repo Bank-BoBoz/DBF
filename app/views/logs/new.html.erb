@@ -1,11 +1,105 @@
-<h1>New log</h1>
+<!-- <h1>New log</h1>
 
-<%= form_for(@log) do |f| %>
+  -->
+
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <!-- <div class="field">
+    <%= f.label :hashed_password %><br />
+    <%= f.text_field :hashed_password %>
+  </div>
+  <div class="field">
+    <%= f.label :salt %><br />
+    <%= f.text_field :salt %>
+  </div>   -->
+
+  <div class="field">
+    <%= f.label :FirstName %><br />
+    <%= f.text_field :firstName %>
+  </div>
+
+  <div class="field">
+    <%= f.label :LastName %><br />
+    <%= f.text_field :lastName %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PhoneNumber %><br />
+    <%= f.text_field :phoneNumber %>
+  </div>
 
 
-<%= render 'form' %>
+  <div class="field">
+    <%= f.label :role %><br />
+    <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+  </div>
+
+   <% if @user.role == "patient" %>
+  <div class="field">
+    <%= f.label :pair %><br />
+    <%= f.collection_select(:pair, User.find_all_by_role("doctor"),:name, :name)%>
+  </div>
+   <!-- <% end %> -->
 
 
-<%= link_to 'Back', logs_path %>
+    <%= form_for(@log) do |f| %>
+  <% if @log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@log.errors.count, "error") %> prohibited this log from being saved:</h2>
 
+      <ul>
+      <% @log.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </div>
+
+
+  <%= f.hidden_field :time, :value => Time.current %>
+
+
+  <div class="field">
+    <%= f.label :category %><br />
+    <%= f.collection_select :category, Log::CATEGORY, :to_s, :humanize %>
+  </div>
+  <div class="field">
+    <%= f.label :note %><br />
+    <%= f.text_field :note %>
+  </div>
+
+  <div class="field">
+     <%= f.hidden_field :own, :value=> User.find_by_id(session[:user_id]).name %>
+  </div>
+
+    <div class="field">
+     <%= f.hidden_field :user_id, :value=> User.find_by_id(session[:user_id]).id %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
+<%end %>
